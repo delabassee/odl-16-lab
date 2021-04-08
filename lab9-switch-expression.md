@@ -71,14 +71,14 @@ private void getSpeakersById(ServerRequest request, ServerResponse response) {
 
    String id = request.path().param("id").trim();
 
-   record SpeakrDetails(String id, String name, String title, String company, String trackName) {}
+   record SpeakerDetails(String id, String name, String title, String company, String trackName) {}
 
    try {
       if (Util.isValidQueryStr(response, id)) {
          var match = this.speakers.getById(id);
          if (match.isPresent()) {
             var s = match.get();
-            response.send(new SpeakrDetails(s.id(),
+            response.send(new SpeakerDetails(s.id(),
                   s.firstName() + " " + s.lastName(),
                   s.title(),
                   s.company(),
@@ -94,7 +94,7 @@ private void getSpeakersById(ServerRequest request, ServerResponse response) {
 </copy>
 ```
 
-This method is simple. It first defines a new "SpeakrDetails" local record, and then if a speaker for a given ID is found, it creates a record for that speaker. Note that the new `getTrackDetail` is being used to populate the record track component. Finally, it simply sends the JSON representation of this speaker record back to the client.
+This method is simple. It first defines a new "SpeakerDetails" local record, and then if a speaker for a given ID is found, it creates a record for that speaker. Note that the new `getTrackDetail` is being used to populate the record track component. Finally, it simply sends the JSON representation of this speaker record back to the client.
 
 💡 This method also leverages the local record feature introduced in Lab7.
 
@@ -119,7 +119,7 @@ The second issue is tied to the "default" case. Given that the `Track.java` enum
 
 The last problem is tied to the fact that this code is quite repetitive and verbose (ex. we assign a different value to the `trackDetail` string in all the branches, etc.) and also quite error-prone (ex. you know what it's like to forget a `break`!).
 
-You can solve this by replacing that Switch statement with the **Swith Expression** below.
+You can solve this by replacing that Switch statement with the **Switch Expression** below.
 
 ```
 <copy>
