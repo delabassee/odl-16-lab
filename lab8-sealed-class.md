@@ -61,8 +61,6 @@ package conference.session;
 
 import conference.Track;
 
-import java.util.UUID;
-
 sealed public abstract class Session
 permits Keynote, Breakout {
 
@@ -71,7 +69,6 @@ permits Keynote, Breakout {
 
     public Session(String id, String title) {
         this.title = title;
-        //uid = UUID.randomUUID().toString();
         this.id= id;
     }
 
@@ -179,7 +176,7 @@ final public class Lecture extends Breakout {
         this.slidesUrl = slidesUrl;
     }
 
-    public String getslidesUrl() {
+    public String getSlidesUrl() {
         return slidesUrl;
     }
 }
@@ -234,7 +231,6 @@ import conference.session.Session;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public final class AgendaRepository {
 
@@ -280,10 +276,8 @@ nano src/main/java/conference/AgendaService.java
 <copy>
 package conference;
 
-import conference.session.Keynote;
-import conference.session.Lab;
-import conference.session.Lecture;
 import conference.session.Session;
+import conference.AgencyRepository;
 import io.helidon.webserver.Routing;
 import io.helidon.webserver.ServerRequest;
 import io.helidon.webserver.ServerResponse;
